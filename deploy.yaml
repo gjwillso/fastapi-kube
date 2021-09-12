@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: qsk-deploy
+  name: fastapi-demo-deploy
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
-      project: qsk-book
+      project: fastapi-demo
   template:
     metadata:
       labels:
-        project: qsk-book
+        project: fastapi-demo
     spec: 
       containers:
-      - name: 
+      - name: fastapi-demo-pod
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-        image: nigelpoulton/qsk-book:1.0
+        image: gjwillso/fastapi-demo:latest
