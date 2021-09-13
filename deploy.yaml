@@ -2,19 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fastapi-demo-deploy
+  labels:
+    customer: gjw
 spec:
-  replicas: 2
   selector:
     matchLabels:
-      project: fastapi-demo
+      app: fastapi-demo
+  replicas: 3
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        project: fastapi-demo
-    spec: 
+        app: fastapi-demo
+    spec:
       containers:
-      - name: fastapi-demo-pod
-        imagePullPolicy: Always
+      - image: gjwillso/fastapi-demo:latest
+        name: fastapi-demo-ctr
         ports:
-        - containerPort: 8080
-        image: gjwillso/fastapi-demo:latest
+        - containerPort: 8000
